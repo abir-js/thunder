@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Background Color Changer</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body
+    style="
+      background-color: rgb(43, 40, 40);
+      color: white;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    "
+  >
+    <div class="flex gap-4 flex-col">
+      <button
+        class="border border-none px-9 py-3 rounded bg-red-500 hover:bg-red-600"
+      >
+        red
+      </button>
+      <button
+        class="border border-none px-1 py-3 rounded bg-green-700 hover:bg-green-600"
+      >
+        green
+      </button>
+      <button
+        class="border border-none px-1 py-3 rounded bg-blue-800 hover:bg-blue-600"
+      >
+        blue
+      </button>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
