@@ -1,0 +1,6 @@
+GET http://localhost:3000/userinfo HTTP/1.1
+Accept: application/json
+
+###* Create a new user
+GET http://localhost:3000/createuser HTTP/1.1
+Accept: application/json
