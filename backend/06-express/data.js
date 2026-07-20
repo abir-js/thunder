@@ -1,0 +1,38 @@
+export let products = [
+  {
+    id: 1,
+    name: "iPhone 12",
+    price: 999,
+    rating: 4.5,
+    category: "Electronics",
+    brand: "Apple",
+    inStock: true,
+  },
+  {
+    id: 2,
+    name: "iPhone 13",
+    price: 999,
+    rating: 4.5,
+    category: "Electronics",
+    brand: "Apple",
+    inStock: true,
+  },
+    {
+    id: 3,
+    name: "iPhone 14",
+    price: 999,
+    rating: 4.5,
+    category: "Electronics",
+    brand: "Apple",
+    inStock: true,
+  },
+  {
+    id: 4,
+    name: "iPhone 15",
+    price: 999,
+    rating: 4.5,
+    category: "Electronics",
+    brand: "Apple",
+    inStock: true,
+  },
+];
