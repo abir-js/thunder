@@ -6,33 +6,29 @@ const app = express();
 app.use(express.json());
 
 app.get("/products", (req, res) => {
-  res.json(products);
-});
+  const { price, rating, category } = req.query;
 
-// query params
-app.get("/products/search", (req, res) => {
-  const { name, minPrice, maxPrice } = req.query;
-  let filteredProducts = products;
+  let filteredData = products;
 
-  if (name) {
-    filteredProducts = filteredProducts.filter((p) =>
-      p.name.toLowerCase().includes(name.toLowerCase()),
+  if (price) {
+    filteredData = filteredData.filter(
+      (product) => product.price >= Number(price),
     );
   }
 
-  if (minPrice) {
-    filteredProducts = filteredProducts.filter(
-      (p) => p.price >= parseFloat(minPrice),
+  if (rating) {
+    filteredData = filteredData.filter(
+      (product) => product.rating >= Number(rating),
     );
   }
 
-  if (maxPrice) {
-    filteredProducts = filteredProducts.filter(
-      (p) => p.price <= parseFloat(maxPrice),
+  if (category) {
+    filteredData = filteredData.filter(
+      (product) => product.category === category,
     );
   }
 
-  res.json(filteredProducts);
+  res.json(filteredData);
 });
 
 // route params
@@ -43,6 +39,57 @@ app.get("/products/:id", (req, res) => {
     return res.status(404).json({ error: "Product not found" });
   }
   return res.json(product);
+});
+
+app.post("/products", (req, res) => {
+  const product = req.body;
+
+  products.push(product);
+
+  res.status(200).json({
+    message: "Data added successfully",
+    product,
+  });
+});
+
+app.patch("/products/:id", (req, res) => {
+  const id = req.params.id;
+  const { price, rating } = req.body;
+
+  let product;
+
+  if (id) {
+    product = products.find((p) => p.id === parseInt(id));
+
+    if (price) {
+      product.price = parseInt(price);
+    }
+
+    if (rating) {
+      product.rating = Number(rating);
+    }
+  }
+
+  res.json({
+    message: "Updated successfully",
+    product,
+  });
+});
+
+app.delete("/products/:id", (req, res) => {
+  let { id } = req.params;
+
+  const index = products.findIndex((p) => p.id === parseInt(id));
+  if (index === -1) {
+    return res.status(404).json({ error: "Product not found" });
+  }
+
+  const deletedProduct = products.splice(index, 1);
+
+  res.status(200).json({
+    message: "Data deleted successfully",
+    deletedProduct,
+  });
 });
 
 app.listen(3000, () => {
