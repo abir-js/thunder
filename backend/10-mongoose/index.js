@@ -62,16 +62,44 @@ app.get("/customers", async (req, res) => {
 
 // filter on city
 app.get("/customers/filter", async (req, res) => {
-  const { city } = req.query;
-  const customers = await Customer.find({ city });
-  if (!customers || customers.length === 0) {
+  const { city, accountType } = req.query;
+  const customers = await Customer.find(req.query);
+  if (!customers || customers.length === 0 || !city || !accountType) {
     return res.status(404).json({
-      message: "No customers found for the given city",
+      message: "No customers found for the given criteria",
     });
   }
   res.status(200).json({
     message: "Filtered customers retrieved successfully",
     customers,
+  });
+});
+
+// update city of a customer
+app.patch("/customer/:accountNumber", async (req, res) => {
+  const { city } = req.body;
+
+  const user = await Customer.findOneAndUpdate(
+    { accountNumber: req.params.accountNumber },
+    {
+      city: city,
+      age: 10,
+    },
+    {
+      new: true,
+      runValidators: true,
+    },
+  );
+
+  if (!user) {
+    return res.status(404).json({
+      message: "Customer not found",
+    });
+  }
+
+  res.status(200).json({
+    message: "Customer updated successfully",
+    user,
   });
 });
 
@@ -95,8 +123,8 @@ app.get("/customer/:accountNumber", async (req, res) => {
 
 // delete cusotmer based on account number
 app.delete("/customer/:accountNumber", async (req, res) => {
-  const {accountNumber} = req.params;
-  
+  const { accountNumber } = req.params;
+
   const customer = await Customer.findOneAndDelete({ accountNumber });
 
   if (!customer) {
@@ -109,7 +137,7 @@ app.delete("/customer/:accountNumber", async (req, res) => {
     message: "Customer deleted successfully",
     customer,
   });
-})
+});
 
 await mongoose
   .connect(process.env.MONGO_URI)
