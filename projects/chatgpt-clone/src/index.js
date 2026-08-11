@@ -1,16 +1,20 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/database.js";
+import userRouter from "./router/user.router.js";
+import messageRouter from "./router/message.router.js";
+import chatRouter from "./router/chat.router.js";
 
 dotenv.config();
 
 const app = express();
-
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
+
+app.use("/api/users", userRouter);
+app.use("/api/messages", messageRouter);
+app.use("/api/chats", chatRouter);
 
 const startServer = async () => {
   try {
