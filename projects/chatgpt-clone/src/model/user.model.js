@@ -1,16 +1,18 @@
 import mongoose from "mongoose";
-// validate: rohit@gmail
+
 const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
+      minlength: 2,
+      maxlength: 100,
     },
 
     age: {
       type: Number,
-      min: 10,
-      max: 100,
+      min: 0,
+      max: 120,
     },
     email: {
       type: String,

@@ -3,6 +3,10 @@ import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 
 import User from "../model/user.model.js";
+import {
+  loginValidatorSchema,
+  signupValidatorSchema,
+} from "../validators/user.validator.js";
 
 dotenv.config();
 
@@ -18,7 +22,15 @@ const createToken = (userId, email) => {
 
 const signupController = async (req, res) => {
   try {
-    const { name, email, password, age } = req.body;
+    const validationResult = signupValidatorSchema.safeParse(req.body);
+    if (!validationResult.success) {
+      return res.status(400).json({
+        message: "Invalid input data",
+        errors: validationResult.error.flatten(),
+      });
+    }
+
+    const { name, email, password, age } = validationResult.data;
 
     if (!name || !email || !password || !age) {
       return res.status(400).json({ message: "All fields are required" });
@@ -64,7 +76,16 @@ const signupController = async (req, res) => {
 
 const loginController = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const validationResult = loginValidatorSchema.safeParse(req.body);
+
+    if (!validationResult.success) {
+      return res.status(400).json({
+        message: "Invalid input data",
+        errors: validationResult.error.flatten(),
+      });
+    }
+
+    const { email, password } = validationResult.data;
 
     if (!email || !password) {
       return res
