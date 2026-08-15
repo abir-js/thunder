@@ -1,5 +1,5 @@
-import Chat from "../models/chat.model.js";
-import Message from "../models/message.model.js";
+import Chat from "../model/chat.model.js"
+import Message from "../model/message.model.js";
 
 const createChatController = async (req, res) => {
   try {

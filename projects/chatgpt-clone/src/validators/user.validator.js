@@ -3,17 +3,15 @@ import { z } from "zod";
 export const signupValidatorSchema = z.object({
   name: z
     .string()
-    .trim()
     .min(2, "Name must be at least 2 characters long")
     .max(100, "Name must be at most 100 characters long"),
   age: z
     .number()
-    .trim()
     .min(0, "Age must be a positive number")
     .max(120, "Age must be a valid age")
     .optional(),
   email: z.preprocess(
-    (value) => (typeof value === "string" ? value.trim().toLowerCase() : ""),
+    (value) => (typeof value === "string" ? value.toLowerCase() : ""),
     z.email("Please provide a valid email address"),
   ),
   password: z

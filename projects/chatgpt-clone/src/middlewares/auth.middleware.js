@@ -4,7 +4,7 @@ import User from "../model/user.model.js";
 
 dotenv.config();
 
-const authMiddleware = (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
   try {
     const token = req.cookies.token;
 
