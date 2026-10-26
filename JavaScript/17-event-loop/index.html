@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body {
+            background-color: #1a1a1a;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        .btn1 {
+            background-color: red;
+        }
+
+        .btn2 {
+            background-color: green;
+        }
+
+        .btn3 {
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn1">Button 1</button>
+    <button class="btn2">Button 2</button>
+    <button class="btn3">Button 3</button>
+
+    <script>
+        const btn1 = document.querySelector('.btn1');
+        const btn2 = document.querySelector('.btn2');
+        const btn3 = document.querySelector('.btn3');
+
+        btn1.addEventListener('click', () => {
+            console.log('Button 1 clicked');
+        });
+
+        btn2.addEventListener('click', () => {
+            console.log('Button 2 clicked');
+        });
+
+        btn3.addEventListener('click', () => {
+            console.log('Button 3 clicked');
+        });
+    </script>
+</body>
+</html>
