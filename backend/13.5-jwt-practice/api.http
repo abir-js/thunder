@@ -1,0 +1,23 @@
+POST  http://localhost:3000/signup HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "a",
+    "email": "a@example.com",
+    "password": "password123",
+    "age": 25
+}
+
+###
+
+POST http://localhost:3000/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "a@example.com",
+    "password": "password123"
+}
+
+
+### GET /profile
+GET http://localhost:3000/profile HTTP/1.1
